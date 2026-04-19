@@ -18,6 +18,8 @@ public class monopolyView {
         while(!done){
             System.out.println("Choose an ID (1,2,3,4)");
             System.out.println("test");
+            System.out.println("test2");
+            System.out.println("test3");
             tmp1 = Integer.parseInt(read.nextLine());
             if (tmp1 == 1 || tmp1 == 2 || tmp1 == 3 || tmp1 == 4) { //make sure it is valid ID
                 done = true;
