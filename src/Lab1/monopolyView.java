@@ -61,9 +61,11 @@ public class monopolyView extends JFrame {
         }
         
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        
+        //Patrick:HUGE WHITE BUTTON FOR ROLLING DICE
         JButton btnRoll = new JButton("ROLL DICE");
         btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
-        btnRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnRoll.setAlignmentX(Component.RIGHT_ALIGNMENT);
         btnRoll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
