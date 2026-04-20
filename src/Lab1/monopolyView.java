@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//Patrick:Not my code but these looks messy,i probably should try list down how they work
 public class monopolyView extends JFrame {
     monopolyModel model;
     monopolyController controller;
@@ -15,41 +15,46 @@ public class monopolyView extends JFrame {
     JLabel lblTurn;
     
     public monopolyView(monopolyModel model, monopolyController controller) {
+        //Patrick:Contructor,for setting up view
         this.model = model;
         this.controller = controller;
         this.controller.setView(this);
-        
+        //Patrick:title is title,size is size of the base jframe board
+        //Patrick:CloseOperation should be what happens when the app closes i guess...
+        //Patrick:layout is layout,looks similar to android java xml
         setTitle("Mini-Monopoly: HSU Edition");
         setSize(1100, 850);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
-        // 1. Center - Board
+        //Patrick:the monopoly board
+        //Patrick:add make ui components show
         boardPanel = new BoardPanel();
         boardPanel.setPreferredSize(new Dimension(800, 800));
         add(boardPanel, BorderLayout.CENTER);
         
-        // 2. East - Dashboard
+        //Patrick:2nd board on the right showing all the details
         JPanel dashPanel = new JPanel();
         dashPanel.setPreferredSize(new Dimension(300, 800));
         dashPanel.setLayout(new BoxLayout(dashPanel, BoxLayout.Y_AXIS));
         dashPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         
+        
         JLabel title = new JLabel("DASHBOARD");
         title.setFont(new Font("Arial", Font.BOLD, 20));
         dashPanel.add(title);
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        
+        //Patrick:Hardcoding player 1 as first to move before loading anything from model
         lblTurn = new JLabel("Current Turn: Player 1");
         lblTurn.setFont(new Font("Arial", Font.BOLD, 16));
+        //Patrick:adding the jlabel,adding it to show and make spacing around it
         dashPanel.add(lblTurn);
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        
+        //Patrick:4 players, jlabel array with size of 4
         lblPlayers = new JLabel[4];
         
-        
+        //for loop,add jlabels inside the array,then adding the array to show 
         for (int i=0; i<4; i++) {
-            
             
             lblPlayers[i] = new JLabel("Player " + (i+1) + " | Balance: 2000 | Active");
             dashPanel.add(lblPlayers[i]);
@@ -109,7 +114,8 @@ public class monopolyView extends JFrame {
                 default:
                     showColor = "-1";
                 }
-            //switch case end
+            //switch case end,and actually, idk what to put in default so its -1
+            
             lblPlayers[i].setText(p.getUsername()+" ("+showColor+")"+" | Bal: $" + p.getBalance() + " | " + p.getStatus());
             if ("Bankrupt".equals(p.getStatus())) {
                 lblPlayers[i].setForeground(Color.RED);
