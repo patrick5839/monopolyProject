@@ -54,7 +54,7 @@ public class monopolyController {
             p.setBalance(p.getBalance() + 2000);
             view.log("Player " + p.getPlayerID() + " passed GO and received $2000!");
         }
-        
+        p.setPosition(newPos);
         return newPos;
     }
     public void manageTurn() { 
@@ -75,7 +75,7 @@ public class monopolyController {
         int newPos = movePlayer(p,roll);
         
         
-        p.setPosition(newPos);
+        
         
         slotData slot = model.getBoardData().getSlot(newPos);
         view.log("Landed on: " + slot.getSlotName());
