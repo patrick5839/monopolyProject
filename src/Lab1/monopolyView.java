@@ -46,31 +46,12 @@ public class monopolyView extends JFrame {
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
         lblPlayers = new JLabel[4];
-        //Patrick:adding color display to avoid confusion
-        String showColor = "";
+        
         
         for (int i=0; i<4; i++) {
-            //Patrick:switch case,try to show the color belongs to each player
-            //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
-            switch(i) {
-                case 0:
-                    showColor = "Red";
-                    break;
-                case 1:
-                    showColor = "Blue";
-                    break;
-                case 2:
-                    showColor = "Yellow";
-                    break;    
-                case 3:
-                    showColor = "Green";
-                    break;    
-                default:
-                    showColor = "-1";
-                }
             
             
-            lblPlayers[i] = new JLabel("Player " + (i+1) +" ("+showColor+")"+ " | Balance: 2000 | Active");
+            lblPlayers[i] = new JLabel("Player " + (i+1) + " | Balance: 2000 | Active");
             dashPanel.add(lblPlayers[i]);
             dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
@@ -103,12 +84,33 @@ public class monopolyView extends JFrame {
         txtLog.append(msg + "\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
-    
+    //Patrick:adding color display to avoid confusion
+        String showColor = "";
+        
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
         for (int i=0; i<4; i++) {
             playerInfo p = model.getPlayers()[i];
-            lblPlayers[i].setText(p.getUsername() + " | Bal: $" + p.getBalance() + " | " + p.getStatus());
+            //Patrick:switch case,try to show the color belongs to each player
+            //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
+            switch(i) {
+                case 0:
+                    showColor = "Red";
+                    break;
+                case 1:
+                    showColor = "Blue";
+                    break;
+                case 2:
+                    showColor = "Yellow";
+                    break;    
+                case 3:
+                    showColor = "Green";
+                    break;    
+                default:
+                    showColor = "-1";
+                }
+            //switch case end
+            lblPlayers[i].setText(p.getUsername()+" ("+showColor+")"+" | Bal: $" + p.getBalance() + " | " + p.getStatus());
             if ("Bankrupt".equals(p.getStatus())) {
                 lblPlayers[i].setForeground(Color.RED);
             } else {
