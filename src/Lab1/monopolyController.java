@@ -21,13 +21,24 @@ public class monopolyController {
         view.repaintBoard();
     }
     
+    
+    public boolean isBankRupt(){
+        playerInfo p = model.getPlayers()[activePlayerIndex];
+        //Patrick:return true if player is in backrupt
+        if ("Bankrupt".equals(p.getStatus())) {
+            nextTurn();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public void rollDice() {
         playerInfo p = model.getPlayers()[activePlayerIndex];
         
-        //Patrick:skip if player is in backrupt
-        if ("Bankrupt".equals(p.getStatus())) {
+        //Patrick:skip if isBankRupt returned true
+        if (isBankRupt()) {
             nextTurn();
-            return;
         }
         
         Random dice = new Random();
