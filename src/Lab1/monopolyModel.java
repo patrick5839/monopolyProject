@@ -7,14 +7,15 @@ public class monopolyModel {
     playerInfo[] players = new playerInfo[4];
     playboardData boardData;
 
-    
+    public monopolyModel(monopolyView view, monopolyController controller, playboardData boardData) {
+        this.view = view;
+        this.controller = controller;
+    }
 
     
 
     
     public monopolyModel() {
-        this.view = view;
-        this.controller = controller;
         for(int i = 0; i < 4; i++) {
             players[i] = new playerInfo();
             players[i].setPlayerID(i + 1);
