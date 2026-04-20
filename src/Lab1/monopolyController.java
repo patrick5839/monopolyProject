@@ -14,13 +14,19 @@ public class monopolyController {
     public void setModel(monopolyModel m) { this.model = m; }
     public void setView(monopolyView v) { this.view = v; }
     
-    //Patrick:get the slot names,update dashboard to show player,paint out the monopoly picture
+    //Patrick:used by main class,get the slot names,update dashboard 
+    //to show player info,paint out the monopoly picture
     public void initGame() {
         model.getBoardData().loadData(new File("data.txt"));
         view.updateDashboard();
         view.repaintBoard();
     }
-    
+    public int diceRoll(){
+        //Patrick:dice roll from 1 to 10,just as what powerpoint said
+        Random dice = new Random();
+        int roll = dice.nextInt(10) + 1;
+        return roll;
+    }
     
     public boolean isBankRupt(){
         playerInfo p = model.getPlayers()[activePlayerIndex];
@@ -59,10 +65,8 @@ public class monopolyController {
             nextTurn();
             return;
         }
-        //Patrick:dice rolling
-        Random dice = new Random();
-        int roll = dice.nextInt(10) + 1; // 1 to 10
-        //Patrick:dice roll ends here
+        
+        int roll = diceRoll();
         
         rollDiceAnnounce(roll);
         
@@ -74,7 +78,7 @@ public class monopolyController {
         slotData slot = model.getBoardData().getSlot(newPos);
         view.log("Landed on: " + slot.getSlotName());
         
-        // Auto-buy/pay mechanism for testing GUI
+        //Patrick:i moved the autobuy into its own method
         autoBuyTest(slot);
         
         nextTurn();
