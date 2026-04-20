@@ -134,7 +134,9 @@ public class monopolyView extends JFrame {
         boardPanel.repaint();
     }
     
-    //Patrick:This is the whole monopoly gameboard as a innerclass
+    //Patrick:I guess this is the whole monopoly gameboard picture as a class
+    //Patrick:oh god i cant understand this
+    
     class BoardPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
