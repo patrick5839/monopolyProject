@@ -46,8 +46,31 @@ public class monopolyView extends JFrame {
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
         lblPlayers = new JLabel[4];
+        //Patrick:adding color display to avoid confusion
+        String showColor = "";
+        
         for (int i=0; i<4; i++) {
-            lblPlayers[i] = new JLabel("Player " + (i+1) + " | Balance: 2000 | Active");
+            //Patrick:switch case,try to show the color belongs to each player
+            //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
+            switch(i) {
+                case 1:
+                    showColor = "Red";
+                    break;
+                case 2:
+                    showColor = "Blue";
+                    break;
+                case 3:
+                    showColor = "Yellow";
+                    break;    
+                case 4:
+                    showColor = "Green";
+                    break;    
+                default:
+    
+}
+            
+            
+            lblPlayers[i] = new JLabel("Player " + (i+1) +" ("+showColor+")"+ " | Balance: 2000 | Active");
             dashPanel.add(lblPlayers[i]);
             dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         }
