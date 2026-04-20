@@ -53,21 +53,21 @@ public class monopolyView extends JFrame {
             //Patrick:switch case,try to show the color belongs to each player
             //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
             switch(i) {
-                case 1:
+                case 0:
                     showColor = "Red";
                     break;
-                case 2:
+                case 1:
                     showColor = "Blue";
                     break;
-                case 3:
+                case 2:
                     showColor = "Yellow";
                     break;    
-                case 4:
+                case 3:
                     showColor = "Green";
                     break;    
                 default:
-    
-}
+                    showColor = "-1";
+                }
             
             
             lblPlayers[i] = new JLabel("Player " + (i+1) +" ("+showColor+")"+ " | Balance: 2000 | Active");
