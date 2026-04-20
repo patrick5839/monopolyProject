@@ -92,6 +92,8 @@ public class monopolyView extends JFrame {
     //Patrick:adding color display to avoid confusion
         String showColor = "";//Patrick:Initialize
         
+    //Patrick:update info of player1,2,3,4
+        
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
         for (int i=0; i<4; i++) {
@@ -133,10 +135,8 @@ public class monopolyView extends JFrame {
     public void repaintBoard() {
         boardPanel.repaint();
     }
-    
     //Patrick:I guess this is the whole monopoly gameboard picture as a class
     //Patrick:oh god i cant understand this
-    
     class BoardPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
