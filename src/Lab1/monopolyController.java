@@ -45,9 +45,9 @@ public class monopolyController {
         view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
     }
     
-    public int movePlayer(int roll){
+    public int movePlayer(int oldPos,int roll){
         playerInfo p = model.getPlayers()[activePlayerIndex];
-        int oldPos = p.getPosition();
+        
         int newPos = oldPos + roll;
         
         if (newPos >= 44) {
@@ -60,17 +60,18 @@ public class monopolyController {
     }
     public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
-        //Patrick:skip diceroll if isBankRupt returned true
+        //Patrick:skip the turn if isBankRupt returned true
         if (isBankRupt()) {
             nextTurn();
             return;
-        }
-        
+        }   
         int roll = diceRoll();
-        
+        //Patrick:announce the rolled number
         rollDiceAnnounce(roll);
         
-        int newPos = movePlayer(roll);
+        int oldPos = p.getPosition();
+        
+        int newPos = movePlayer(oldPos,roll);
         
         
         p.setPosition(newPos);
