@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 //Patrick:Not my code but these looks messy,i probably should try list down how they work
+//Patrick:Redundant codes will be changed by me
+
 public class monopolyView extends JFrame {
     monopolyModel model;
     monopolyController controller;
@@ -50,11 +52,10 @@ public class monopolyView extends JFrame {
         lblTurn.setFont(new Font("Arial", Font.BOLD, 16));
         //Patrick:adding the jlabel,adding it to show and make spacing around it
         dashPanel.add(lblTurn);
-        dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        
         
         
         //for loop, initialize lblPlayers
-        dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         for (int i=0; i<4; i++) {    
               lblPlayers[i] = new JLabel("");
         }
