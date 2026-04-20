@@ -54,7 +54,7 @@ public class monopolyView extends JFrame {
         btnRoll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.rollDice();
+                controller.manageTurn();
             }
         });
         btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
