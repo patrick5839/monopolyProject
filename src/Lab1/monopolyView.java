@@ -22,7 +22,7 @@ public class monopolyView extends JFrame {
         //Patrick:Contructor,for setting up everything
         this.model = model;
         this.controller = controller;
-        this.controller.setView(this);
+        
         
         //Patrick:setup size of the jframe base,setup layout
         setTitle("Mini-Monopoly: HSU Edition");
