@@ -40,9 +40,7 @@ public class monopolyController {
         }
     }
     
-    public void rollDiceAnnounce(playerInfo p,int roll){
-        view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
-    }
+    
     
     public int movePlayer(playerInfo p,int roll){
         
@@ -68,15 +66,12 @@ public class monopolyController {
         }   
         int roll = diceRoll();
         //Patrick:announce the rolled number
-        rollDiceAnnounce(p,roll);
+        view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
+        
         
         
         
         int newPos = movePlayer(p,roll);
-        
-        
-        
-        
         slotData slot = model.getBoardData().getSlot(newPos);
         view.log("Landed on: " + slot.getSlotName());
         
