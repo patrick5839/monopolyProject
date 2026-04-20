@@ -55,24 +55,26 @@ public class monopolyView extends JFrame {
         
         
         
-        //for loop, initialize lblPlayers
+        //Patrick:for loop, initialize lblPlayers array,fill every slot
         for (int i=0; i<4; i++) {    
               lblPlayers[i] = new JLabel("");
         }
         
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        //Patrick:dice row button
+        
         JButton btnRoll = new JButton("ROLL DICE");
-        btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
-        btnRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
         btnRoll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.rollDice();
             }
         });
+        btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
+        btnRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
         dashPanel.add(btnRoll);
         
-        dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        
         txtLog = new JTextArea(15, 20);
         txtLog.setEditable(false);
         txtLog.setLineWrap(true);
@@ -89,7 +91,7 @@ public class monopolyView extends JFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     //Patrick:adding color display to avoid confusion
-        String showColor = "";
+        String showColor = "";//Patrick:Initialize
         
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
