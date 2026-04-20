@@ -9,9 +9,11 @@ public class monopolyView extends JFrame {
     monopolyModel model;
     monopolyController controller;
     
+    //Patrick:dashPanel,for board on right showing all the text
+    JPanel dashPanel = new JPanel();
     BoardPanel boardPanel;
     JTextArea txtLog;
-    JLabel[] lblPlayers;
+    JLabel[] lblPlayers = new JLabel[4];//Patrick: 4 players array size of 4 so on
     JLabel lblTurn;
     
     public monopolyView(monopolyModel model, monopolyController controller) {
@@ -33,8 +35,7 @@ public class monopolyView extends JFrame {
         boardPanel.setPreferredSize(new Dimension(800, 800));
         add(boardPanel, BorderLayout.CENTER);
         
-        //Patrick:2nd board on the right showing all the details
-        JPanel dashPanel = new JPanel();
+        
         dashPanel.setPreferredSize(new Dimension(300, 800));
         dashPanel.setLayout(new BoxLayout(dashPanel, BoxLayout.Y_AXIS));
         dashPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,15 +51,13 @@ public class monopolyView extends JFrame {
         //Patrick:adding the jlabel,adding it to show and make spacing around it
         dashPanel.add(lblTurn);
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        //Patrick:4 players, jlabel array with size of 4
-        lblPlayers = new JLabel[4];
+        
         
         //for loop,add jlabels inside the array,then adding the array to show 
         for (int i=0; i<4; i++) {
             
             lblPlayers[i] = new JLabel("Player " + (i+1) + " | Balance: 2000 | Active");
-            dashPanel.add(lblPlayers[i]);
-            dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            
         }
         
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -95,7 +94,10 @@ public class monopolyView extends JFrame {
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
         for (int i=0; i<4; i++) {
+            dashPanel.add(lblPlayers[i]);
+            dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
             playerInfo p = model.getPlayers()[i];
+            //Patrick:I added the switch case to show colors
             //Patrick:switch case,try to show the color belongs to each player
             //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
             switch(i) {
