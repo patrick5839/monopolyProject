@@ -19,7 +19,7 @@ public class monopolyView extends JFrame {
     JLabel lblTurn;
     
     public monopolyView(monopolyModel model, monopolyController controller) {
-        //Patrick:Contructor,for setting up view
+        //Patrick:Contructor,for setting up everything
         this.model = model;
         this.controller = controller;
         this.controller.setView(this);
@@ -45,24 +45,16 @@ public class monopolyView extends JFrame {
         
         JLabel title = new JLabel("DASHBOARD");
         title.setFont(new Font("Arial", Font.BOLD, 20));
-        dashPanel.add(title);
-        dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        
         //Patrick:Hardcoding player 1 as first to move before loading anything from model
         lblTurn = new JLabel("Current Turn: Player 1");
         lblTurn.setFont(new Font("Arial", Font.BOLD, 16));
         //Patrick:adding the jlabel,adding it to show and make spacing around it
-        dashPanel.add(lblTurn);
-        
-        
-        
         //Patrick:for loop, initialize lblPlayers array,fill every slot
         for (int i=0; i<4; i++) {    
               lblPlayers[i] = new JLabel("");
         }
-        
-        dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         //Patrick:dice row button
-        
         JButton btnRoll = new JButton("ROLL DICE");
         btnRoll.addActionListener(new ActionListener() {
             @Override
@@ -72,7 +64,7 @@ public class monopolyView extends JFrame {
         });
         btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
         btnRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
-        dashPanel.add(btnRoll);
+        
         
         
         txtLog = new JTextArea(15, 20);
@@ -80,9 +72,13 @@ public class monopolyView extends JFrame {
         txtLog.setLineWrap(true);
         txtLog.setWrapStyleWord(true);
         JScrollPane scrollLog = new JScrollPane(txtLog);
+        
+        dashPanel.add(title);
+        dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+        dashPanel.add(btnRoll);
         dashPanel.add(new JLabel("Game Log:"));
         dashPanel.add(scrollLog);
-        
+        dashPanel.add(lblTurn);
         add(dashPanel, BorderLayout.EAST);
     }
     
