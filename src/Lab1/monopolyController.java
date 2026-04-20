@@ -4,6 +4,7 @@ import java.util.Random;
 import java.io.File;
 
 public class monopolyController {
+    //Patrick:setup model,setup view
     monopolyModel model;
     monopolyView view;
     int activePlayerIndex = 0;
