@@ -53,12 +53,8 @@ public class monopolyView extends JFrame {
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
         
-        //for loop,add jlabels inside the array,then adding the array to show 
-        for (int i=0; i<4; i++) {
-            
-            lblPlayers[i] = new JLabel("Player " + (i+1) + " | Balance: 2000 | Active");
-            
-        }
+        //for loop,add jlabels inside the array,then adding the array to show
+        dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         JButton btnRoll = new JButton("ROLL DICE");
@@ -95,7 +91,7 @@ public class monopolyView extends JFrame {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
         for (int i=0; i<4; i++) {
             dashPanel.add(lblPlayers[i]);
-            dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
+            
             playerInfo p = model.getPlayers()[i];
             //Patrick:I added the switch case to show colors
             //Patrick:switch case,try to show the color belongs to each player
