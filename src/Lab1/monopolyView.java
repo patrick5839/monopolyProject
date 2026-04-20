@@ -53,10 +53,10 @@ public class monopolyView extends JFrame {
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         
         
-        //for loop,add jlabels inside the array,then adding the array to show
+        //for loop, initialize lblPlayers
         dashPanel.add(Box.createRigidArea(new Dimension(0, 10)));
         for (int i=0; i<4; i++) {    
-              
+              lblPlayers[i] = new JLabel("");
         }
         
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -93,7 +93,7 @@ public class monopolyView extends JFrame {
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
         for (int i=0; i<4; i++) {
-            lblPlayers[i] = new JLabel("");
+            
             dashPanel.add(lblPlayers[i]);
             
             playerInfo p = model.getPlayers()[i];
