@@ -8,13 +8,9 @@ public class monopolyController {
     monopolyModel model;
     monopolyView view;
     int activePlayerIndex = 0;
-
-    public monopolyController(monopolyModel model, monopolyView view) {
-        this.model = model;
-        this.view = view;
-    }
     
-    
+    public void setModel(monopolyModel m) { this.model = m; }
+    public void setView(monopolyView v) { this.view = v; }
     
     public void initGame() {
         model.getBoardData().loadData(new File("data.txt"));
