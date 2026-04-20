@@ -8,7 +8,7 @@ public class monopolyController {
     monopolyModel model;
     monopolyView view;
     
-    //Patrick:idk what is this
+    //Patrick:check whos turn it is
     int activePlayerIndex = 0;
     
     public void setModel(monopolyModel m) { this.model = m; }
@@ -28,8 +28,8 @@ public class monopolyController {
         return roll;
     }
     
-    public boolean isBankRupt(){
-        playerInfo p = model.getPlayers()[activePlayerIndex];
+    public boolean isBankRupt(playerInfo p){
+        
         //Patrick:return true if player is in backrupt
         if ("Bankrupt".equals(p.getStatus())) {
             nextTurn();
@@ -40,13 +40,12 @@ public class monopolyController {
         }
     }
     
-    public void rollDiceAnnounce(int roll){
-        playerInfo p = model.getPlayers()[activePlayerIndex];
+    public void rollDiceAnnounce(playerInfo p,int roll){
         view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
     }
     
-    public int movePlayer(int oldPos,int roll){
-        playerInfo p = model.getPlayers()[activePlayerIndex];
+    public int movePlayer(playerInfo p,int oldPos,int roll){
+        
         
         int newPos = oldPos + roll;
         
@@ -61,17 +60,17 @@ public class monopolyController {
     public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
         //Patrick:skip the turn if isBankRupt returned true
-        if (isBankRupt()) {
+        if (isBankRupt(p)) {
             nextTurn();
             return;
         }   
         int roll = diceRoll();
         //Patrick:announce the rolled number
-        rollDiceAnnounce(roll);
+        rollDiceAnnounce(p,roll);
         
         int oldPos = p.getPosition();
         
-        int newPos = movePlayer(oldPos,roll);
+        int newPos = movePlayer(p,oldPos,roll);
         
         
         p.setPosition(newPos);
