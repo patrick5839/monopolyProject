@@ -44,9 +44,9 @@ public class monopolyController {
         view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
     }
     
-    public int movePlayer(playerInfo p,int oldPos,int roll){
+    public int movePlayer(playerInfo p,int roll){
         
-        
+        int oldPos = p.getPosition();
         int newPos = oldPos + roll;
         
         if (newPos >= 44) {
@@ -70,9 +70,9 @@ public class monopolyController {
         //Patrick:announce the rolled number
         rollDiceAnnounce(p,roll);
         
-        int oldPos = p.getPosition();
         
-        int newPos = movePlayer(p,oldPos,roll);
+        
+        int newPos = movePlayer(p,roll);
         
         
         p.setPosition(newPos);
