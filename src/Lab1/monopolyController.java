@@ -34,11 +34,13 @@ public class monopolyController {
         }
     }
     public void rollDice() {
+        
         playerInfo p = model.getPlayers()[activePlayerIndex];
         
-        //Patrick:skip if isBankRupt returned true
+        //Patrick:skip diceroll if isBankRupt returned true
         if (isBankRupt()) {
             nextTurn();
+            return;
         }
         
         Random dice = new Random();
