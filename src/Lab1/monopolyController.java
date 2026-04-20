@@ -33,20 +33,14 @@ public class monopolyController {
             return false;
         }
     }
-    public void rollDice() {
-        
+    
+    public void rollDiceAnnounce(int roll){
         playerInfo p = model.getPlayers()[activePlayerIndex];
-        
-        //Patrick:skip diceroll if isBankRupt returned true
-        if (isBankRupt()) {
-            nextTurn();
-            return;
-        }
-        
-        Random dice = new Random();
-        int roll = dice.nextInt(10) + 1; // 1 to 10
         view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
-        
+    }
+    
+    public int movePlayer(int roll){
+        playerInfo p = model.getPlayers()[activePlayerIndex];
         int oldPos = p.getPosition();
         int newPos = oldPos + roll;
         
@@ -55,6 +49,25 @@ public class monopolyController {
             p.setBalance(p.getBalance() + 2000);
             view.log("Player " + p.getPlayerID() + " passed GO and received $2000!");
         }
+        
+        return newPos;
+    }
+    public void rollDice() { 
+        playerInfo p = model.getPlayers()[activePlayerIndex];
+        //Patrick:skip diceroll if isBankRupt returned true
+        if (isBankRupt()) {
+            nextTurn();
+            return;
+        }
+        //Patrick:dice rolling
+        Random dice = new Random();
+        int roll = dice.nextInt(10) + 1; // 1 to 10
+        //Patrick:dice roll ends here
+        
+        rollDiceAnnounce(roll);
+        
+        int newPos = movePlayer(roll);
+        
         
         p.setPosition(newPos);
         
