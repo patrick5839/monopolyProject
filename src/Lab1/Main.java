@@ -11,7 +11,7 @@ public class Main {
                 controller.setModel(model);
                 
                 monopolyView view = new monopolyView(model, controller);
-                
+                controller.setView(view);
                 // Initialize game data
                 controller.initGame();
                 
