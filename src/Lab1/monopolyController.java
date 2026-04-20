@@ -60,6 +60,8 @@ public class monopolyController {
     public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
         //Patrick:skip the turn if isBankRupt returned true
+        //Patrick:all method with playerinfo needs to know which player its pointing
+        //to so p is in the arguments
         if (isBankRupt(p)) {
             nextTurn();
             return;
@@ -79,15 +81,15 @@ public class monopolyController {
         view.log("Landed on: " + slot.getSlotName());
         
         //Patrick:i moved the autobuy into its own method
-        autoBuyTest(slot);
+        autoBuyTest(p,slot);
         
         nextTurn();
         view.updateDashboard();
         view.repaintBoard();
     }
     //Patrick:just as the method name
-    public void autoBuyTest(slotData slot){
-        playerInfo p = model.getPlayers()[activePlayerIndex];
+    public void autoBuyTest(playerInfo p,slotData slot){
+        
         if (slot.getPrice() > 0 && slot.getOwnerID() == 0) {
             if (p.getBalance() >= slot.getPrice()) {
                 p.setBalance(p.getBalance() - slot.getPrice());
