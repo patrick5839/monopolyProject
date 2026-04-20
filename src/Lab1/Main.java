@@ -8,7 +8,7 @@ public class Main {
             public void run() {
                 monopolyModel model = new monopolyModel();
                 monopolyController controller = new monopolyController();
-                controller.setModel(model);
+                
                 
                 monopolyView view = new monopolyView(model, controller);
                 
