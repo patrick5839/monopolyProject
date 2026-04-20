@@ -23,9 +23,8 @@ public class monopolyView extends JFrame {
         this.model = model;
         this.controller = controller;
         this.controller.setView(this);
-        //Patrick:title is title,size is size of the base jframe board
-        //Patrick:CloseOperation should be what happens when the app closes i guess...
-        //Patrick:layout is layout,looks similar to android java xml
+        
+        //Patrick:setup size of the jframe base,setup layout
         setTitle("Mini-Monopoly: HSU Edition");
         setSize(1100, 850);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,15 +36,11 @@ public class monopolyView extends JFrame {
         boardPanel.setPreferredSize(new Dimension(800, 800));
         add(boardPanel, BorderLayout.CENTER);
         
-        
+        //Patrick:setting size of dashboard
         dashPanel.setPreferredSize(new Dimension(300, 800));
         dashPanel.setLayout(new BoxLayout(dashPanel, BoxLayout.Y_AXIS));
         dashPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
-        
-        JLabel title = new JLabel("DASHBOARD");
-        title.setFont(new Font("Arial", Font.BOLD, 20));
-        
+
         //Patrick:Hardcoding player 1 as first to move before loading anything from model
         lblTurn = new JLabel("Current Turn: Player 1");
         lblTurn.setFont(new Font("Arial", Font.BOLD, 16));
@@ -54,7 +49,7 @@ public class monopolyView extends JFrame {
         for (int i=0; i<4; i++) {    
               lblPlayers[i] = new JLabel("");
         }
-        //Patrick:dice row button
+        //Patrick:setting up dice row button
         JButton btnRoll = new JButton("ROLL DICE");
         btnRoll.addActionListener(new ActionListener() {
             @Override
@@ -64,15 +59,22 @@ public class monopolyView extends JFrame {
         });
         btnRoll.setFont(new Font("Arial", Font.BOLD, 18));
         btnRoll.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //Patrick:dice row setup ends here
         
-        
-        
+        //Patrick:The textbox showing game history
         txtLog = new JTextArea(15, 20);
         txtLog.setEditable(false);
         txtLog.setLineWrap(true);
         txtLog.setWrapStyleWord(true);
         JScrollPane scrollLog = new JScrollPane(txtLog);
+        //Patrick:textbox setup ends
         
+        //Patrick:setting up title to place in dashboard
+        JLabel title = new JLabel("DASHBOARD");
+        title.setFont(new Font("Arial", Font.BOLD, 20));
+        //Patrick:title setup ends
+        
+        //Patrick:Add all components
         dashPanel.add(title);
         dashPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         dashPanel.add(btnRoll);
@@ -80,6 +82,7 @@ public class monopolyView extends JFrame {
         dashPanel.add(scrollLog);
         dashPanel.add(lblTurn);
         add(dashPanel, BorderLayout.EAST);
+        //Patrick:End here
     }
     
     public void log(String msg) {
@@ -98,7 +101,7 @@ public class monopolyView extends JFrame {
             playerInfo p = model.getPlayers()[i];
             //Patrick:I added the switch case to show colors
             //Patrick:switch case,try to show the color belongs to each player
-            //P1:RED,P2:BLUE ,P3:YELLOW,P4: GREEN
+            //P1:RED,P2:BLUE,P3:YELLOW,P4:GREEN
             switch(i) {
                 case 0:
                     showColor = "Red";
@@ -115,9 +118,10 @@ public class monopolyView extends JFrame {
                 default:
                     showColor = "-1";
                 }
-            //switch case end,and actually, idk what to put in default so its -1
-            
+            //Patrick:default is -1 because idk what to put
             lblPlayers[i].setText(p.getUsername()+" ("+showColor+")"+" | Bal: $" + p.getBalance() + " | " + p.getStatus());
+            
+            //Patrick:update to show player is in backrupt
             if ("Bankrupt".equals(p.getStatus())) {
                 lblPlayers[i].setForeground(Color.RED);
             } else {
@@ -130,7 +134,7 @@ public class monopolyView extends JFrame {
         boardPanel.repaint();
     }
     
-    // Custom painting for the Board
+    //Patrick:This is the whole monopoly gameboard as a innerclass
     class BoardPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
