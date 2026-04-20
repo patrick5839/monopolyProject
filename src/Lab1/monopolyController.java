@@ -68,9 +68,6 @@ public class monopolyController {
         //Patrick:announce the rolled number
         view.log("Player " + p.getPlayerID() + " (" + p.getUsername() + ") rolled a " + roll);
         
-        
-        
-        
         int newPos = movePlayer(p,roll);
         slotData slot = model.getBoardData().getSlot(newPos);
         view.log("Landed on: " + slot.getSlotName());
@@ -105,6 +102,7 @@ public class monopolyController {
         }
     }
     
+    //Patrick:this should be deal with later,repeated bankrupt check
     public void nextTurn() {
         activePlayerIndex = (activePlayerIndex + 1) % 4;
         playerInfo nextP = model.getPlayers()[activePlayerIndex];
