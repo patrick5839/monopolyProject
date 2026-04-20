@@ -52,7 +52,7 @@ public class monopolyController {
         
         return newPos;
     }
-    public void rollDice() { 
+    public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
         //Patrick:skip diceroll if isBankRupt returned true
         if (isBankRupt()) {
@@ -75,6 +75,15 @@ public class monopolyController {
         view.log("Landed on: " + slot.getSlotName());
         
         // Auto-buy/pay mechanism for testing GUI
+        autoBuyTest(slot);
+        
+        nextTurn();
+        view.updateDashboard();
+        view.repaintBoard();
+    }
+    //Patrick:just as the method name
+    public void autoBuyTest(slotData slot){
+        playerInfo p = model.getPlayers()[activePlayerIndex];
         if (slot.getPrice() > 0 && slot.getOwnerID() == 0) {
             if (p.getBalance() >= slot.getPrice()) {
                 p.setBalance(p.getBalance() - slot.getPrice());
@@ -93,10 +102,6 @@ public class monopolyController {
                 view.log("Player " + p.getPlayerID() + " is BANKRUPT!");
             }
         }
-        
-        nextTurn();
-        view.updateDashboard();
-        view.repaintBoard();
     }
     
     public void nextTurn() {
