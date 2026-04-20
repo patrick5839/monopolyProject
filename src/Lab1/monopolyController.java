@@ -7,11 +7,14 @@ public class monopolyController {
     //Patrick:setup model,setup view
     monopolyModel model;
     monopolyView view;
+    
+    //Patrick:idk what is this
     int activePlayerIndex = 0;
     
     public void setModel(monopolyModel m) { this.model = m; }
     public void setView(monopolyView v) { this.view = v; }
     
+    //Patrick:get the slot names,update dashboard to show player,paint out the monopoly picture
     public void initGame() {
         model.getBoardData().loadData(new File("data.txt"));
         view.updateDashboard();
@@ -20,6 +23,8 @@ public class monopolyController {
     
     public void rollDice() {
         playerInfo p = model.getPlayers()[activePlayerIndex];
+        
+        //Patrick:skip if player is in backrupt
         if ("Bankrupt".equals(p.getStatus())) {
             nextTurn();
             return;
