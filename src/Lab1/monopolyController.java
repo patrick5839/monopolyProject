@@ -106,7 +106,15 @@ public class monopolyController {
     public void nextTurn() {
         activePlayerIndex = (activePlayerIndex + 1) % 4;
         playerInfo nextP = model.getPlayers()[activePlayerIndex];
-        // Skip bankrupt
+        // Skip if bankrupt
+        if (isAllBankrupt(nextP)) {
+            view.log("Game Over!");
+        }
+        
+        
+    }
+    
+    public boolean isAllBankrupt(playerInfo nextP){
         if ("Bankrupt".equals(nextP.getStatus())) {
             int bankruptCount = 0;
             for(playerInfo p : model.getPlayers()){
@@ -115,9 +123,10 @@ public class monopolyController {
             if (bankruptCount < 3) {
                  activePlayerIndex = (activePlayerIndex + 1) % 4;
             } else {
-                 view.log("Game Over!");
+                return true;
             }
         }
+        return false;
     }
     
     public int getActivePlayerIndex() {
