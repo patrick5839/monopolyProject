@@ -57,6 +57,8 @@ public class monopolyController {
     }
     public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
+        
+        
         //Patrick:skip the turn if isBankRupt returned true
         //Patrick:all method with playerinfo needs to know which player its pointing
         //to so p is in the arguments
@@ -106,12 +108,17 @@ public class monopolyController {
     public void nextTurn() {
         activePlayerIndex = (activePlayerIndex + 1) % 4;  
         // Skip if bankrupt
-        isAllBankrupt();
-        playerInfo nextP = model.getPlayers()[activePlayerIndex];
+        if (isAllBankrupt()) {
+            view.log("Game Over!");
+        }
+        else{
+            playerInfo nextP = model.getPlayers()[activePlayerIndex];
+        }
         
     }
     
-    public void isAllBankrupt(){
+    //Patrick:check if everyone is in bankrupt
+    public boolean isAllBankrupt(){
         //Patrick:bankrupt count and get all players
         int bankruptCheck = 0;
         playerInfo[] allPlayers = model.getPlayers();
@@ -121,13 +128,17 @@ public class monopolyController {
             }
         }
         if (bankruptCheck==3) {
-            view.log("Game Over!");
+            
             view.log("Player "+findWinner(allPlayers).getPlayerID()+" has won!");
+            return true;
         }
         if (bankruptCheck==4) {
             view.log("This is a tied game.");
+            return true;
         }
+        return false;
     }
+    
     //Patrick:only use when 1 guy left
     public playerInfo findWinner(playerInfo[] allPlayers){
         playerInfo winner = new playerInfo();
