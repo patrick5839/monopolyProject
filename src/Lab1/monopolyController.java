@@ -57,8 +57,6 @@ public class monopolyController {
     }
     public void manageTurn() { 
         playerInfo p = model.getPlayers()[activePlayerIndex];
-        
-        
         //Patrick:skip the turn if isBankRupt returned true
         //Patrick:all method with playerinfo needs to know which player its pointing
         //to so p is in the arguments
@@ -128,7 +126,6 @@ public class monopolyController {
             }
         }
         if (bankruptCheck==3) {
-            
             view.log("Player "+findWinner(allPlayers).getPlayerID()+" has won!");
             return true;
         }
