@@ -104,29 +104,39 @@ public class monopolyController {
     
     //Patrick:this should be deal with later,repeated bankrupt check
     public void nextTurn() {
-        activePlayerIndex = (activePlayerIndex + 1) % 4;
-        playerInfo nextP = model.getPlayers()[activePlayerIndex];
+        activePlayerIndex = (activePlayerIndex + 1) % 4;  
         // Skip if bankrupt
-        if (isAllBankrupt(nextP)) {
-            view.log("Game Over!");
-        }
-        
+        isAllBankrupt();
+        playerInfo nextP = model.getPlayers()[activePlayerIndex];
         
     }
     
-    public boolean isAllBankrupt(playerInfo nextP){
-        if ("Bankrupt".equals(nextP.getStatus())) {
-            int bankruptCount = 0;
-            for(playerInfo p : model.getPlayers()){
-                if ("Bankrupt".equals(p.getStatus())) bankruptCount++;
-            }
-            if (bankruptCount < 3) {
-                 activePlayerIndex = (activePlayerIndex + 1) % 4;
-            } else {
-                return true;
+    public void isAllBankrupt(){
+        //Patrick:bankrupt count and get all players
+        int bankruptCheck = 0;
+        playerInfo[] allPlayers = model.getPlayers();
+        for (int i = 0; i < allPlayers.length; i++) {
+            if (allPlayers[i].getStatus().equals("Bankrupt")) {
+                bankruptCheck+=1;
             }
         }
-        return false;
+        if (bankruptCheck==3) {
+            view.log("Game Over!");
+            view.log("Player "+findWinner(allPlayers).getPlayerID()+" has won!");
+        }
+        if (bankruptCheck==4) {
+            view.log("This is a tied game.");
+        }
+    }
+    //Patrick:only use when 1 guy left
+    public playerInfo findWinner(playerInfo[] allPlayers){
+        playerInfo winner = new playerInfo();
+        for (int i = 0; i < allPlayers.length; i++) {
+            if (allPlayers[i].getStatus().equals("Active")) {
+                winner = allPlayers[i];
+            }
+        }
+        return winner;
     }
     
     public int getActivePlayerIndex() {
