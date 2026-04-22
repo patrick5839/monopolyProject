@@ -150,4 +150,8 @@ public class monopolyController {
     public int getActivePlayerIndex() {
         return activePlayerIndex;
     }
+    
+    public void cheatCodeAction(){
+        
+    }
 }
