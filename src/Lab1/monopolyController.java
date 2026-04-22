@@ -154,7 +154,7 @@ public class monopolyController {
     public void cheatCodeAction(int newTurn,int playerID,int balance,int position,int status,int slotTarget,int slotNewOwner){
         //patrick:if not default value set the player input value
         if (newTurn!=0) {
-            activePlayerIndex = newTurn;
+            activePlayerIndex = newTurn-1;
         }
         if (playerID!=0) {
             if (balance!=0) {
