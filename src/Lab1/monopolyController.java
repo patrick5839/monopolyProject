@@ -158,23 +158,23 @@ public class monopolyController {
         }
         if (playerID!=0) {
             if (balance!=0) {
-                model.players[playerID].setBalance(balance);
+                model.players[playerID-1].setBalance(balance);
             }
             if (position!=-1) {
-                model.players[playerID].setPosition(position);
+                model.players[playerID-1].setPosition(position);
             }
             if (status!=0) {
                 if (status==1) {
-                    model.players[playerID].setStatus("Active");
+                    model.players[playerID-1].setStatus("Active");
                 }
                 if (status==2) {
-                    model.players[playerID].setStatus("Bankrupt");
+                    model.players[playerID-1].setStatus("Bankrupt");
                 }
                 
             }
             if (slotTarget!=-1 && slotNewOwner!=0) {
                 slotData slot = model.getBoardData().getSlot(slotTarget);
-                slot.setOwnerID(playerID);
+                slot.setOwnerID(playerID-1);
             }
         }
         
