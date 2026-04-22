@@ -152,7 +152,7 @@ public class monopolyController {
     }
     
     public void cheatCodeAction(int newTurn,int playerID,int balance,int position,int status,int slotTarget,int slotNewOwner){
-        //patrick:if not default value set the player input value
+        //patrick:all those if statements are if not default value change in model
         if (newTurn!=0) {
             activePlayerIndex = newTurn-1;
         }
