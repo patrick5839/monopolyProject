@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.event.*;
 //Patrick:Not my code but these looks messy,i probably should try list down how they work
 //Patrick:Redundant codes will be changed by me
 
