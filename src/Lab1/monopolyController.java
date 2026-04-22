@@ -151,7 +151,7 @@ public class monopolyController {
         return activePlayerIndex;
     }
     
-    public void cheatCodeAction(){
+    public void cheatCodeAction(int newTurn,int playerID,int balance,int position,String status,int slotTarget,int slotNewOwner){
         
     }
 }
