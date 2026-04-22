@@ -92,7 +92,7 @@ public class monopolyView extends JFrame {
         getRootPane().getActionMap().put("showEditor", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.showEditor();
+                showEditor();
             }
         });
     
@@ -102,9 +102,91 @@ public class monopolyView extends JFrame {
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
     //Patrick:adding color display to avoid confusion
-        String showColor = "";//Patrick:Initialize
+    String showColor = "";
         
-    //Patrick:update info of player1,2,3,4
+    
+    //Patrick:cheat code editor
+    public void showEditor(){
+        JDialog editor = new JDialog(monopolyView.this, "Game Editor (Cheat)", true);
+        editor.setLayout(new BorderLayout(5, 5));
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 4, 4, 4);
+
+        JComboBox<String> turnCombo = new JComboBox<>(new String[]{"1", "2", "3", "4"});
+        //turnCombo.setSelectedIndex(activePlayerIndex);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Current Turn (Player ID):"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(turnCombo, gbc);
+
+        JComboBox<String> playerCombo = new JComboBox<>(new String[]{"1", "2", "3", "4"});
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Player ID to Modify:"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(playerCombo, gbc);
+
+        JTextField balanceField = new JTextField();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("New Balance ($):"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(balanceField, gbc);
+
+        JTextField posField = new JTextField();
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("New Position (0-43):"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(posField, gbc);
+
+        JComboBox<String> statusCombo = new JComboBox<>(new String[]{"Active", "Bankrupt"});
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Set Status:"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(statusCombo, gbc);
+
+        JTextField slotField = new JTextField();
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("Slot Number to Change Owner:"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(slotField, gbc);
+
+        JTextField ownerField = new JTextField();
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.weightx = 0;
+        formPanel.add(new JLabel("New Owner ID (0=none):"), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        formPanel.add(ownerField, gbc);
+
+        editor.add(formPanel, BorderLayout.CENTER);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton applyButton = new JButton("Apply Changes");
+        buttonPanel.add(applyButton);
+        editor.add(buttonPanel, BorderLayout.SOUTH);
+    
+    }
+        
         
     public void updateDashboard() {
         lblTurn.setText("Current Turn: " + model.getPlayers()[controller.getActivePlayerIndex()].getUsername());
