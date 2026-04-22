@@ -92,6 +92,7 @@ public class monopolyView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 controller.showEditor();
             }
+        });
     
     }
     public void log(String msg) {
