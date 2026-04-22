@@ -220,10 +220,6 @@ public class monopolyView extends JFrame {
                     slotTarget = Integer.parseInt(slotField.getText());
                     newOwner = Integer.parseInt(ownerField.getText());
                 }
-                else{
-                    slotTarget = Integer.parseInt(slotField.getText());
-                    newOwner = Integer.parseInt(ownerField.getText());
-                }
                 updateDashboard();
                 repaintBoard();
                 //patrick:supposingly,grab all things,pass to controller
