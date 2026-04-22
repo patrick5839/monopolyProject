@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
 //Patrick:Not my code but these looks messy,i probably should try list down how they work
 //Patrick:Redundant codes will be changed by me
 
@@ -107,7 +108,7 @@ public class monopolyView extends JFrame {
     String showColor = "";
         
     
-    //Patrick:cheat code editor
+    //Patrick:basicly,cheats
     public void showEditor(){
         JDialog editor = new JDialog(monopolyView.this, "Game Editor (Cheat)", true);
         editor.setLayout(new BorderLayout(5, 5));
@@ -116,23 +117,23 @@ public class monopolyView extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 4, 4, 4);
-
-        JComboBox<String> turnCombo = new JComboBox<>(new String[]{"1", "2", "3", "4"});
-        turnCombo.setSelectedIndex(controller.activePlayerIndex);
-        //turnCombo.setSelectedIndex(activePlayerIndex);
+        
+        JComboBox<String> turnCombo = new JComboBox<>(new String[]{" ","1", "2", "3", "4"});
+        
+        
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0;
-        formPanel.add(new JLabel("Current Turn (Player ID):"), gbc);
+        formPanel.add(new JLabel("Set Turn by Player ID:"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         formPanel.add(turnCombo, gbc);
 
-        JComboBox<String> playerCombo = new JComboBox<>(new String[]{"1", "2", "3", "4"});
+        JComboBox<String> playerCombo = new JComboBox<>(new String[]{" ","1", "2", "3", "4"});
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weightx = 0;
-        formPanel.add(new JLabel("Player ID to Modify:"), gbc);
+        formPanel.add(new JLabel("Modify stats by player ID:"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         formPanel.add(playerCombo, gbc);
@@ -141,7 +142,7 @@ public class monopolyView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.weightx = 0;
-        formPanel.add(new JLabel("New Balance ($):"), gbc);
+        formPanel.add(new JLabel("set Balance ($):"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         formPanel.add(balanceField, gbc);
@@ -150,12 +151,12 @@ public class monopolyView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 3;
         gbc.weightx = 0;
-        formPanel.add(new JLabel("New Position (0-43):"), gbc);
+        formPanel.add(new JLabel("set Position (0-43):"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         formPanel.add(posField, gbc);
 
-        JComboBox<String> statusCombo = new JComboBox<>(new String[]{"Active", "Bankrupt"});
+        JComboBox<String> statusCombo = new JComboBox<>(new String[]{" ","Active", "Bankrupt"});
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.weightx = 0;
@@ -177,7 +178,7 @@ public class monopolyView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 6;
         gbc.weightx = 0;
-        formPanel.add(new JLabel("New Owner ID (0=none):"), gbc);
+        formPanel.add(new JLabel("New Owner ID (0 for no owner):"), gbc);
         gbc.gridx = 1;
         gbc.weightx = 1.0;
         formPanel.add(ownerField, gbc);
@@ -190,44 +191,29 @@ public class monopolyView extends JFrame {
         //Patrick:separate,view and controller
         applyButton.addActionListener(e -> {
             try {
-                
-                int newTurn = Integer.parseInt((String) turnCombo.getSelectedItem());
-                // activePlayerIndex = newTurn - 1;
+                  int newTurn = turnCombo.getSelectedIndex();
                 //Patrick:pid should return -1 if nothing selected
-                int pid = playerCombo.getSelectedIndex()+1;
-                playerInfo target = model.getPlayers()[pid - 1];
-                //patrick:check empty or not
+                int pid = playerCombo.getSelectedIndex();
+                
                 int balance = 0;
-                if (balanceField.getText().isEmpty()) {
-                    log("balance is empty");
-                    
+                if (!balanceField.getText().isEmpty()) {
+                        balance = Integer.parseInt(balanceField.getText());         
                 }
-                else{
-                    balance = Integer.parseInt(balanceField.getText());
-                }
+
                 //patrick:check if empty
-                int pos = 0;
-                if (posField.getText().isEmpty()) {
-                    log("position is empty");
-                    //if (pos >= 0 && pos < 44) {
-                      //  target.setPosition(pos);
-                    //}
-                }
-                else{
-                    pos = Integer.parseInt(posField.getText());
-                }
+                int pos = -1;
+                
+                    if (!posField.getText().isEmpty() && Integer.parseInt(posField.getText())<44) {
+                        pos = Integer.parseInt(posField.getText());
+                    }
+                
                 //patrick:get selected status
-                String status = statusCombo.getSelectedItem().toString();
-                int slotTarget = 0;
+                int status = statusCombo.getSelectedIndex();
+                int slotTarget = -1;
                 int newOwner = 0;
-                if (slotField.getText().isEmpty() && ownerField.getText().isEmpty()) {
-                    
-                    //if (slotIdx >= 0 && slotIdx < 44) {
-                      //  slotData slot = model.getBoardData().getSlot(slotIdx);
-                       // if (slot != null) {
-                        //    slot.setOwnerID(newOwner);
-                        //}
-                    //}
+                if (!slotField.getText().isEmpty() && !ownerField.getText().isEmpty()) {
+                    slotTarget = Integer.parseInt(slotField.getText());
+                    newOwner = Integer.parseInt(ownerField.getText());
                 }
                 else{
                     slotTarget = Integer.parseInt(slotField.getText());
@@ -240,7 +226,7 @@ public class monopolyView extends JFrame {
                 log("[Editor] Game state modified.");
                 editor.dispose();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(editor, "Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(editor, "Incorrect format.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         editor.pack();
