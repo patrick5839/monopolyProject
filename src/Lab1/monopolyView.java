@@ -84,6 +84,8 @@ public class monopolyView extends JFrame {
         dashPanel.add(scrollLog);
         dashPanel.add(lblTurn);
         add(dashPanel, BorderLayout.EAST);
+        
+        cheatCode();
         //Patrick:End here
     }
     public void cheatCode(){
