@@ -118,6 +118,7 @@ public class monopolyView extends JFrame {
         gbc.insets = new Insets(4, 4, 4, 4);
 
         JComboBox<String> turnCombo = new JComboBox<>(new String[]{"1", "2", "3", "4"});
+        turnCombo.setSelectedIndex(controller.activePlayerIndex);
         //turnCombo.setSelectedIndex(activePlayerIndex);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -186,7 +187,62 @@ public class monopolyView extends JFrame {
         JButton applyButton = new JButton("Apply Changes");
         buttonPanel.add(applyButton);
         editor.add(buttonPanel, BorderLayout.SOUTH);
-        
+        //Patrick:separate,view and controller
+        applyButton.addActionListener(e -> {
+            try {
+                
+                int newTurn = Integer.parseInt((String) turnCombo.getSelectedItem());
+                // activePlayerIndex = newTurn - 1;
+                //Patrick:pid should return -1 if nothing selected
+                int pid = playerCombo.getSelectedIndex()+1;
+                playerInfo target = model.getPlayers()[pid - 1];
+                //patrick:check empty or not
+                int balance = 0;
+                if (balanceField.getText().isEmpty()) {
+                    log("balance is empty");
+                    
+                }
+                else{
+                    balance = Integer.parseInt(balanceField.getText());
+                }
+                //patrick:check if empty
+                int pos = 0;
+                if (posField.getText().isEmpty()) {
+                    log("position is empty");
+                    //if (pos >= 0 && pos < 44) {
+                      //  target.setPosition(pos);
+                    //}
+                }
+                else{
+                    pos = Integer.parseInt(posField.getText());
+                }
+                //patrick:get selected status
+                String status = statusCombo.getSelectedItem().toString();
+                int slotTarget = 0;
+                int newOwner = 0;
+                if (slotField.getText().isEmpty() && ownerField.getText().isEmpty()) {
+                    
+                    //if (slotIdx >= 0 && slotIdx < 44) {
+                      //  slotData slot = model.getBoardData().getSlot(slotIdx);
+                       // if (slot != null) {
+                        //    slot.setOwnerID(newOwner);
+                        //}
+                    //}
+                }
+                else{
+                    slotTarget = Integer.parseInt(slotField.getText());
+                    newOwner = Integer.parseInt(ownerField.getText());
+                }
+                updateDashboard();
+                repaintBoard();
+                //patrick:supposingly,grab all things,pass to controller
+                controller.cheatCodeAction(newTurn,pid,balance,pos,status,slotTarget,newOwner);
+                log("[Editor] Game state modified.");
+                editor.dispose();
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(editor, "Invalid number format.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
         editor.pack();
         editor.setLocationRelativeTo(monopolyView.this);
         editor.setVisible(true);
