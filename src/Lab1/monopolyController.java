@@ -151,7 +151,32 @@ public class monopolyController {
         return activePlayerIndex;
     }
     
-    public void cheatCodeAction(int newTurn,int playerID,int balance,int position,String status,int slotTarget,int slotNewOwner){
+    public void cheatCodeAction(int newTurn,int playerID,int balance,int position,int status,int slotTarget,int slotNewOwner){
+        //patrick:if not default value set the player input value
+        if (newTurn!=0) {
+            activePlayerIndex = newTurn;
+        }
+        if (playerID!=0) {
+            if (balance!=0) {
+                model.players[playerID].setBalance(balance);
+            }
+            if (position!=-1) {
+                model.players[playerID].setPosition(position);
+            }
+            if (status!=0) {
+                if (status==1) {
+                    model.players[playerID].setStatus("Active");
+                }
+                if (status==2) {
+                    model.players[playerID].setStatus("Bankrupt");
+                }
+                
+            }
+            if (slotTarget!=-1 && slotNewOwner!=0) {
+                slotData slot = model.getBoardData().getSlot(slotTarget);
+                slot.setOwnerID(playerID);
+            }
+        }
         
     }
 }
