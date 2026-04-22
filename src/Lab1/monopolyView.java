@@ -202,9 +202,14 @@ public class monopolyView extends JFrame {
 
                 //patrick:check if empty
                 int pos = -1;
-                
-                    if (!posField.getText().isEmpty() && Integer.parseInt(posField.getText())<44) {
+                //Patrick:wrap with try catch,make it optional
+                    try{
+                        if (!posField.getText().isEmpty() && Integer.parseInt(posField.getText())<44) {
                         pos = Integer.parseInt(posField.getText());
+                        }
+                    }
+                    catch(NumberFormatException abc){
+                        
                     }
                 
                 //patrick:get selected status
