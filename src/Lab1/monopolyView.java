@@ -84,7 +84,16 @@ public class monopolyView extends JFrame {
         add(dashPanel, BorderLayout.EAST);
         //Patrick:End here
     }
+    public void cheatCode(){
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK), "showEditor");
+        getRootPane().getActionMap().put("showEditor", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.showEditor();
+            }
     
+    }
     public void log(String msg) {
         txtLog.append(msg + "\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
