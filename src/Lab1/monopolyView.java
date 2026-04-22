@@ -191,7 +191,7 @@ public class monopolyView extends JFrame {
         //Patrick:separate,view and controller
         applyButton.addActionListener(e -> {
             try {
-                  int newTurn = turnCombo.getSelectedIndex()-1;
+                  int newTurn = turnCombo.getSelectedIndex();
                 int pid = playerCombo.getSelectedIndex();
                 
                 int balance = 0;
