@@ -186,7 +186,11 @@ public class monopolyView extends JFrame {
         JButton applyButton = new JButton("Apply Changes");
         buttonPanel.add(applyButton);
         editor.add(buttonPanel, BorderLayout.SOUTH);
-    
+        
+        editor.pack();
+        editor.setLocationRelativeTo(monopolyView.this);
+        editor.setVisible(true);
+        
     }
         
         
